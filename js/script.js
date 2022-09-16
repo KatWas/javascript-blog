@@ -35,6 +35,7 @@
         optTitleSelector = '.post-title',
         optTitleListSelector = '.titles';
         const optArticleTagsSelector = '.post-tags .list';
+        const optArticleAuthorSelector = '.post-author';
 
          
 
@@ -47,23 +48,27 @@
 
             /* for each article */
             const articles = document.querySelectorAll(optArticleSelector + customSelector);
+            console.log(customSelector);
+            console.log(articles);
             let html = "" ;
-            for (let article of articles);
+            for (let article of articles) {
 
             /* get the article id */
             const articleId = article.getAttribute("id");
 
 
             /* find the title element */
-            const articleTitle = article.querySelector(optTitleListSelector).innerHTML; 
+            const articleTitle = article.querySelector(optTitleSelector).innerHTML; 
 
             /* create HTML of the link */
-            const linkHtml =  '<li><a href="# ' + articleId + '"><span>' + articleTitle + "</span></a></li>";
+            const linkHtml =  '<li><a href="#' + articleId + '"><span>' + articleTitle + "</span></a></li>";
       
 
             /* insert link into titleList */
             html = html + linkHtml;
-            titleList.innerHTML = html;
+            }
+            titleList.innerHTML = html
+            
         
           /*links */
          const links = document.querySelectorAll( '.titles a');
@@ -92,7 +97,7 @@ function generateTags(){
       console.log(articleTags);
   
       /* split tags into array */
-      const articleTagsArray = articleTags.split ("");
+      const articleTagsArray = articleTags.split (" ");
       console.log(articleTagsArray);
   
       /* START LOOP: for each tag */
@@ -100,7 +105,7 @@ function generateTags(){
         console.log(tag);
   
         /* generate HTML of the link */
-        const linkHTML = '<li><a href="tag-' + tag +'"><span>' + tag + "</span></a></li>";
+        const linkHTML = '<li><a href="#tag-' + tag +'"><span>' + tag + "</span></a></li>";
         console.log(linkHTML);
   
         /* add generated code to html variable */
@@ -125,11 +130,11 @@ function generateTags(){
     event.preventDefault();
   
     /* make new constant named "clickedElement" and give it the value of "this" */
-    const clikedElemet = this;
+    const clickedElement = this;
     console.log("cliked tag");
   
     /* make a new constant "href" and read the attribute "href" of the clicked element */
-    const href = clikedElement.getAttribute("href");
+    const href = clickedElement.getAttribute("href");
     console.log(href);
   
     /* make a new constant "tag" and extract tag from the "href" constant */
@@ -160,7 +165,7 @@ function generateTags(){
     }
   
     /* execute function "generateTitleLinks" with article selector as argument */
-    generateTitleLinks('[data-tag~="' + tag + '"]');
+    generateTitleLinks('[data-tags~="' + tag + '"]');
   }
   
   function addClickListenersToTags(){
@@ -188,7 +193,7 @@ function generateTags(){
       const authorNames = article.getAttribute("data-author");
       console.log(authorNames);
       
-      const linkHTML = '<a href= "#author' + authorNames + '"><span>' + " </span></a>";
+      const linkHTML = '<a href= "#author-' + authorNames + '"><span>'+ authorNames + " </span></a>";
       html = html + linkHTML;
 
       authorWrapper.innerHTML = html;
@@ -203,7 +208,7 @@ function generateTags(){
     const href =clikedElement.getAttribute("href");
     console.log(href);
 
-    const author =href.replace("#author","");
+    const author =href.replace("#author-","");
     const authorActives = document.querySelectorAll('a.active[href^="#author"]');
     for (let authorActive of authorActives) {
       
@@ -224,7 +229,7 @@ function generateTags(){
   }
   function addClickListenersToAuthors(){
     /*find all links to tags*/
-    const links =querySelectorAll('a[href^="author"]');
+    const links = document.querySelectorAll('a[href^="#author-"]');
     console.log(links);
 
     /*START LOOP: for each link*/
