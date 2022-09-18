@@ -31,12 +31,12 @@
         
         
 
-        const optArticleSelector = '.post',
-        optTitleSelector = '.post-title',
+        const optArticleSelector = '.post';
+        optTitleSelector = '.post-title';
         optTitleListSelector = '.titles';
         optArticleTagsSelector = '.post-tags .list';
         optArticleAuthorSelector = '.post-author';
-        optTagsListSelector = " .tags .list" ;
+        optTagsListSelector = '.tags .list';
 
          
 
@@ -68,7 +68,7 @@
             /* insert link into titleList */
             html = html + linkHtml;
             }
-            titleList.innerHTML = html
+            titleList.innerHTML = html;
             
         
           /*links */
@@ -80,16 +80,16 @@
 
 generateTitleLinks();
 
-function generateTags(){
+function generateTags() {
 
-    /* [NEW] create a new variable allTags with an empty array */
-      let allTags = [];
+    /* [NEW] create a new variable allTags with an empty object */
+      let allTags = {};
 
     /* find all articles */
       const articles = document.querySelectorAll(optArticleSelector);
   
     /* START LOOP: for every article: */
-    for (let article of articles) {
+      for (let article of articles) {
         
       /* find tags wrapper */
       const tagWrapper = article.querySelector(optArticleTagsSelector);
@@ -114,14 +114,15 @@ function generateTags(){
         console.log(linkHTML);
   
         /* add generated code to html variable */
-        html = html +"" + linkHTML;
+        html = html + "" + linkHTML;
 
         /* [NEW] check if this link is NOT already in allTags */
-       
-        if(allTags.indexOf(linkHTML) == -1){
+        if(!allTags[tag]) {
 
-        /* [NEW] add generated code to allTags array */
-        allTags.push(linkHTML);
+        /* [NEW] add tag to allTags object */
+         allTags[tag] = 1;
+        } else {
+          allTags[tag]++;
       }
   
       /* END LOOP: for each tag */
@@ -135,13 +136,18 @@ function generateTags(){
       /* [NEW] find list of tags in right column */
       const tagList = document.querySelector(optTagsListSelector);
 
-      /* [NEW] add html from allTags to tagList */
-      let allTagsHTML= "";
-      for (let tag in allTags) {
-        allTagsHTML += tag + " (" + allTags[tag] + ")";
-      }
+     /* [NEW] create variable for all links HTML code */
+      let allTagsHTML = '';
       
-      //tagList.innerHTML = allTags.HTML;
+      /* [NEW] START LOOP: for each tag in allTags: */
+      for(let tag in allTags){
+        /* [NEW] generate code of a link and add it to allTagsHTML */
+        allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+      }
+      /* [NEW] END LOOP: for each tag in allTags: */
+      
+      /*[NEW] add HTML from allTagsHTML to tagList */
+      tagList.innerHTML = allTagsHTML;
     }
   }
   
@@ -219,7 +225,6 @@ function generateTags(){
       
       const linkHTML = '<a href= "#author-' + authorNames + '"><span>'+ authorNames + " </span></a>";
       html = html + linkHTML;
-
       authorWrapper.innerHTML = html;
     }
   }
@@ -258,8 +263,10 @@ function generateTags(){
 
     /*START LOOP: for each link*/
     for (let link of links){
+
       /*add tagClickHandler as event listener for taht link */
       link.addEventListener("click", authorClickHandler);
+
       /*END LOOP: for each link*/
     }
   }
