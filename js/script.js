@@ -299,9 +299,9 @@ function generateTags() {
     //let allAuthorsHTML= "";
     const allAuthorsData = { author: []};
     let Link = "";
-    for (let author in allAuthors){
+    for (let author in allAuthors) {
       Link = /* "<li class=" + calculateTagClass(allAuthors[author], authorTagsParams) + '><a href="#author-' + author +'"><span>' + author" + "</span></a>";*/
-      '<li><a href="#author' + author + '"><span>' + author + "(" + allAuthors[author] + ")" + "</span></a></li>;"
+      '<li><a href="#author' + author + '"><span>' + author + " (" + allAuthors[author] + ")" + "</span></a></li>";
     // allAuthorsHTML += Link;
     allAuthorsData.author.push({
       author: author,
@@ -317,7 +317,7 @@ function generateTags() {
   function calculateAuthorsParams(authors) {
     const params = {
       max: 0,
-      min 999999,
+      min: 999999,
     };
     for (let author in authors){
       console.log (author + "is used" + authors[author] + "times");
@@ -330,18 +330,18 @@ function generateTags() {
 }
 return params;
   }
+
   function authorClickHandler(event) {
     event.preventDefault();
     const clikedElement = this;
     console.log("autor kliknięty");
-
-    const href =clikedElement.getAttribute("href");
+    const href = clikedElement.getAttribute("href");
     console.log(href);
-
-    const author =href.replace("#author-","");
+    const author = href.replace("#author-","");
     const authorActives = document.querySelectorAll('a.active[href^="#author"]');
     for (let authorActive of authorActives) {
-      
+      /*remove active class*/
+      authorActive.classList.remove("active");
       /*END LOOP: for each active tag link*/
     }
     /*find all tag links with "href" attribute equal to the "href" constant*/
