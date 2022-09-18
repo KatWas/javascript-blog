@@ -80,7 +80,7 @@
 
 generateTitleLinks();
 
-function generateTags() {
+function generateTags(customSelector = "tags") {
 
     /* [NEW] create a new variable allTags with an empty object */
       let allTags = {};
@@ -136,7 +136,10 @@ function generateTags() {
       /* [NEW] find list of tags in right column */
       const tagList = document.querySelector(optTagsListSelector);
 
-     /* [NEW] create variable for all links HTML code */
+      const tagsParams = calculateTagsParams(allTags);
+      console.log('tagsParams:', tagsParams)
+     
+      /* [NEW] create variable for all links HTML code */
       let allTagsHTML = '';
       
       /* [NEW] START LOOP: for each tag in allTags: */
