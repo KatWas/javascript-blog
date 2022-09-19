@@ -179,8 +179,8 @@ function generateTags() {
       for(let tag in allTags){
         /*generate code of a link and add it to allTagsHTML */
         /* Link = '<li><a href="tag-' + tag +'"><span>' + tag +"</span></a>(" + allTags[tag] + ")</li>; */
-        Link = "<li><a href=#tag-" + tag + "class=" + calculateTagClass(allTags[tag], tagsParams) + ">" + tag + "</a></li>" + " ";
-        /* allTagsHTML += LInk allTagsData.tags.push({tag : tag, count: allTags [tag],, className: calculateTagClass(allTags[tag], tagsParams),});
+        Link ="<li><a href=#tag-" + tag + "class=" + calculateTagClass(allTags[tag], tagsParams) + ">" + tag + "</a></li>" + " ";
+        /* allTagsHTML += Link allTagsData.tags.push({tag : tag, count: allTags [tag],, className: calculateTagClass(allTags[tag], tagsParams),});
         /* [NEW] generate code of a link and add it to allTagsHTML */
         allTagsHTML += tag + ' (' + allTags[tag] + ') ';
       }
