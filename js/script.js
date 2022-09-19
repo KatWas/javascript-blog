@@ -372,10 +372,4 @@ return params;
     }
   }
   addClickListenersToAuthors();
-
-
-
-
-
-
-
+}
