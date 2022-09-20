@@ -151,14 +151,14 @@ function generateTags() {
         /* [NEW] add generated code to allTags array */
          allTags[tag] = 1;
         } else {
-          allTags[tag]++;
+         allTags[tag]++;
       }
   
       /* END LOOP: for each tag */
-    }
+      }
   
       /* insert HTML of all the links into the tags wrapper tagWrapper = tagsList */
-      tagsList.innerHTML = html;
+        tagsList.innerHTML = html;
   
     /* END LOOP: for every article: */
     }
@@ -179,18 +179,32 @@ function generateTags() {
       for(let tag in allTags){
         /*generate code of a link and add it to allTagsHTML */
         /* Link = '<li><a href="tag-' + tag +'"><span>' + tag +"</span></a>(" + allTags[tag] + ")</li>; */
-        Link ="<li><a href=#tag-" + tag + "class=" + calculateTagClass(allTags[tag], tagsParams) + ">" + tag + "</a></li>" + " ";
-        /* allTagsHTML += Link allTagsData.tags.push({tag : tag, count: allTags [tag],, className: calculateTagClass(allTags[tag], tagsParams),});
+        Link =
+        "<li><a href=#tag-" +
+         tag +
+         "class=" + 
+         calculateTagClass(allTags[tag], tagsParams) + 
+         ">" +
+          tag +
+           "</a></li>" +
+            " ";
+        // allTagsHTML += Link
+        allTagsData.tags.push({
+          tag : tag,
+          count: allTags [tag],
+          className: calculateTagClass(allTags[tag], tagsParams),
+        });
         /* [NEW] generate code of a link and add it to allTagsHTML */
         allTagsHTML += tag + ' (' + allTags[tag] + ') ';
-      }
+        }
       /* [NEW] END LOOP: for each tag in allTags: */
     
-      
+}
       /*[NEW] add HTML from allTagsHTML to tagList */
       //tagList.innerHTML = allTagsHTML;
-      tagsList.innerHTML = templates.tagCloudLink(allTagsData);
-    }
+      tagList.innerHTML = templates.tagCloudLink(allTagsData);
+      console.log(allTagsData + " ");
+    
   
   
   generateTags();
