@@ -40,7 +40,7 @@ targetArticle.classList.add("active");
 const optArticleSelector = ".post",
 optTitleSelector = ".post-title",
 optTitleListSelector = ".titles",
-optArticleTagsSelector = ".post-tags.list",
+optArticleTagsSelector = ".post-tags .list",
 optArticleAuthorSelector = ".post-author",
 optTagsListSelector = ".tags.list",
 optCloudClassCount = 5,
@@ -134,7 +134,7 @@ function generateTags() {
       console.log(tag);
   
       /* generate HTML of the link */
-      const linkHTMLData = {id: "tag-" + tag, title: tag };
+      const linkHTMLData = { id: "tag-" + tag, title: tag };
       const linkHTML = templates.articleTag(linkHTMLData); 
          
       /* insert link into html variable */
@@ -142,12 +142,12 @@ function generateTags() {
       /* add generated code to html variable */
       
       /* [NEW] check if this link is NOT already in allTags */
-      if(!allTags.hasOwnProperty(tag)) {
+      if (!allTags.hasOwnProperty(tag)) {
         allTags[tag] = 1;
       } else {
         allTags[tag]++;
       }
-  
+      /* END LOOP: for each tag */
     }
   
     /* insert HTML of all the links into the tags wrapper tagWrapper = tagsList */
@@ -161,10 +161,11 @@ function generateTags() {
    
   /* [NEW] create variable for all links HTML code */
   const tagsParams = calculateTagsParams(allTags);
-  console.log('tagsParams:', tagsParams)
+  console.log('tagsParams,', tagsParams);
 
   /*[NEW] add HTML from allTagsHTML to tagList */
-  const allTagsData = { tags: []};
+  const allTagsData = { tags: [] };
+  let Link = "";
         
   /* [NEW] START LOOP: for each tag in allTags: */
 
@@ -179,18 +180,16 @@ function generateTags() {
   tagsList.innerHTML = templates.tagCloudLink(allTagsData);
 }
 
-/* END LOOP: for every article: */
-
 /* [NEW] find list of tags in right column */
 const tagsList = document.querySelector(optTagsListSelector);
    
 /* [NEW] create variable for all links HTML code */
 const tagsParams = calculateTagsParams(allTags);
-console.log('tagsParams:', tagsParams)
+console.log('tagsParams,', tagsParams);
 
 /*[NEW] add HTML from allTagsHTML to tagList */
 //let allTagsHTML = " " + " ";
-const allTagsData = { tags: []};
+const allTagsData = { tags: [] };
 let Link = "";
         
 /* [NEW] START LOOP: for each tag in allTags: */
@@ -224,7 +223,7 @@ Link =
  /* [NEW] END LOOP: for each tag in allTags: */
  /*[NEW] add HTML from allTagsHTML to tagList */
  //tagList.innerHTML = allTagsHTML;
-  tagList.innerHTML = templates.tagCloudLink(allTagsData);
+  tagsList.innerHTML = templates.tagCloudLink(allTagsData);
   console.log(allTagsData + " ");
     
  generateTags();
